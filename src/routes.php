@@ -23,7 +23,7 @@ use Slim\Http\Response;
 
     $app->get('/', '\App\Controllers\HomeController:index');
     $app->post('/todo', '\App\Controllers\HomeController:addTask');
-    $app->delete('/todo/[{id}]', '\App\Controllers\HomeController:deleteTodo')->setName("deletetodo");
+    $app->delete('/todo/[{id}]', '\App\Controllers\TodosController:deleteTodo')->setName("deletetask");
 
     // Retrieve todo with id 
     $app->get('/todo/[{id}]', function ($request, $response, $args) {

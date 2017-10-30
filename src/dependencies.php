@@ -43,5 +43,9 @@ $container['view'] = function ($container) {
         $container->request->getUri()
     ));
 
+    $view->parserExtensions = array(
+        new \Slim\Views\TwigExtension(),
+    );
+
     return $view;
 };

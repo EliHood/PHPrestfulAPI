@@ -25,7 +25,11 @@ class TodosController extends BaseController
         $sth->bindParam("id", $args['id']);
         $sth->execute();
         $todos = $sth->fetchAll();
-        return $this->response->withJson($todos)->withRedirect('/todos');
+
+    
+      	return $this->response->withRedirect('/todos');
+
+   
 	}
 
 }
