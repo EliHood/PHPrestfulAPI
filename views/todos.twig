@@ -1,0 +1,21 @@
+{% extends "templates/layout.html" %}
+
+{% block content %}
+<h1>My Todos</h1>
+
+<ol>
+  {% for task in todos %}
+  		<div class="myl">
+        <li><h4>{{ task.task}}</h4></li>
+        <small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
+
+
+
+
+
+       
+		</div>
+    {% endfor %}
+
+</ol>
+{% endblock %}

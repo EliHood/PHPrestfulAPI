@@ -1,0 +1,24 @@
+{% extends "templates/layout.html" %}
+
+{% block content %}
+<h2>Welcome, Add A Todo !</h2>
+
+<div class="row">
+	<div class="col-12 col-md-8">
+
+	<form action="/todo" method="post">
+  <div class="form-group">
+    <label for="AddTask">Add Task</label></br>
+   	<input type="text" name="task">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+		
+
+
+	</div>
+</div>
+
+
+{% endblock %}
