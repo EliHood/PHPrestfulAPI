@@ -4,6 +4,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 
+
 // Routes
 
 
@@ -23,7 +24,9 @@ use Slim\Http\Response;
 
     $app->get('/', '\App\Controllers\HomeController:index');
     $app->post('/todo', '\App\Controllers\HomeController:addTask');
-    $app->delete('/todo/[{id}]', '\App\Controllers\TodosController:deleteTodo')->setName("deletetask");
+    
+
+   $app->delete('/todo/[{id}]', '\App\Controllers\TodosController:deleteTodo');
 
     // Retrieve todo with id 
     $app->get('/todo/[{id}]', function ($request, $response, $args) {
@@ -59,14 +62,8 @@ use Slim\Http\Response;
     // });
    
  
-    // // DELETE a todo with given id
-    // $app->delete('/todo/[{id}]', function ($request, $response, $args) {
-    //      $sth = $this->db->prepare("DELETE FROM tasks WHERE id=:id");
-    //     $sth->bindParam("id", $args['id']);
-    //     $sth->execute();
-    //     $todos = $sth->fetchAll();
-    //     return $this->response->withJson($todos);
-    // });
+    // DELETE a todo with given id
+ 
  
     // Update todo with given id
     $app->put('/todo/[{id}]', function ($request, $response, $args) {

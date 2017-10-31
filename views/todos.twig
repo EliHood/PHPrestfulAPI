@@ -10,10 +10,9 @@
         <small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
 
 
-		<a href="{{ path_for('deletetask', {'id': task.id}) }}">Delete</a>
 
 
-       
+       <a href="/todo/{{ task.id}}">Delete</a>
 		</div>
     {% endfor %}
 

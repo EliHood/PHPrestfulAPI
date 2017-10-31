@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-
+use App\Models\Task;
 class HomeController extends BaseController
 {
 	
@@ -16,11 +16,14 @@ class HomeController extends BaseController
 
 	public function addTask($request, $response) {
         $input = $request->getParsedBody();
-        $sql = "INSERT INTO tasks (task) VALUES (:task)";
-        $sth = $this->db->prepare($sql);
-        $sth->bindParam("task", $input['task']);
-        $sth->execute();
-        $input['id'] = $this->db->lastInsertId();
-        return $response->withJson($input)->withRedirect('/todos');
+        $sql = new Task();
+        $sql->task = $input['task'];
+        $sql->save();
+        return $response->write($sql->toJson())->withRedirect('/todos');
    	}
+
+
+
+ 
+
 }

@@ -17,13 +17,34 @@ return [
         ],
 
         // Database connection settings
-        "db" => [
-            'host'     => '127.0.0.1',
-            'port'     => '8889',
-            'dbname' => 'eliapi2',
-            'user' => 'root',
-            'pass' => 'root',
-            'driver'   => 'mysql'
-        ],
+        // "db" => [
+        //     'host'     => '127.0.0.1',
+        //     'port'     => '8889',
+        //     'dbname' => 'eliapi2',
+        //     'user' => 'root',
+        //     'pass' => 'root',
+        //     'driver'   => 'mysql'
+        // ]
+
+
+
+            'db' => [
+ 
+               'driver' => 'mysql',
+ 
+               'host' => '127.0.0.1',
+               
+               'port'     => '8889',
+ 
+               'database' => 'eliapi2',
+ 
+               'username' => 'root',
+ 
+               'password' => 'root',
+ 
+               'charset' => 'utf8',
+ 
+               'collation' => 'utf8_unicode_ci',
+       ]
     ],
 ];

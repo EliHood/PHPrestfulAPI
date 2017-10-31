@@ -22,15 +22,29 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+$capsule = new \Illuminate\Database\Capsule\Manager;
+ 
+$capsule->addConnection($container['settings']['db']);
 
-$container['db'] = function($c){
-	$settings = $c->get('settings')['db'];
-    $pdo = new PDO("mysql:host=" . $settings['host'] . ";dbname=" . $settings['dbname'] . ";port=" . $settings['port'],
-    $settings['user'], $settings['pass']);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $pdo;
+$capsule->setAsGlobal();
+ 
+$capsule->bootEloquent();
+
+// $container['db'] = function($c){
+// 	$settings = $c->get('settings')['db'];
+//     $pdo = new PDO("mysql:host=" . $settings['host'] . ";dbname=" . $settings['dbname'] . ";port=" . $settings['port'],
+//     $settings['user'], $settings['pass']);
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+//     return $pdo;
+// };
+
+$container['db'] = function ($container) use ($capsule){
+ 
+   return $capsule;
+ 
 };
+
 
 
 
@@ -43,9 +57,13 @@ $container['view'] = function ($container) {
         $container->request->getUri()
     ));
 
-    $view->parserExtensions = array(
-        new \Slim\Views\TwigExtension(),
-    );
+    $view->parseExtensions = array( new \Slim\Views\TwigExtension(
+        $container->router,
+        $container->request->getUri()
+    ) );
+
+
+
 
     return $view;
 };
