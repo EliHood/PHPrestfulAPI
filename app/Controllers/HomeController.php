@@ -17,7 +17,19 @@ class HomeController extends BaseController
 	public function addTask($request, $response) {
         $input = $request->getParsedBody();
         $sql = new Task();
-        $sql->task = $input['task'];
+
+        $options = array(
+		    'options' => array(
+		        'default' => 3, // value to return if the filter fails
+		        // other options here
+		        'min_range' => 0
+		    ),
+		    'flags' => FILTER_FLAG_STRIP_BACKTICK,
+		);
+
+        $sql->task = filter_var($input['task'], FILTER_SANITIZE_STRING, $options);
+
+
         $sql->save();
         return $response->write($sql->toJson())->withRedirect('/todos');
    	}

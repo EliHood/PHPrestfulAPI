@@ -5,16 +5,16 @@
 
 <ol>
   {% for task in todos %}
-  		<div class="myl">
+  		<div id="gone" class="myl" ng-controller="myCtrl" ng-hide="hideRow[$index]">
         <li><h4>{{ task.task}}</h4></li>
         <small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
 
 
-	       <form class="form-group" action="/todo/{{task.id}}" method="post">
-			    ... other form fields here...
-			    <input type="hidden" name="_METHOD" value="DELETE"/>
-			    <button type="submit" class="btn btn-primary">Delete</button>
-		</form>
+	   
+	<button id="disappear" class="btn btn-sm btn-danger" ng-click="deleteTask({{task.id}})">Delete</button>
+
+
+
 		</div>
     {% endfor %}
 
