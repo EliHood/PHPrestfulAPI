@@ -23,13 +23,17 @@ class TodosController extends BaseController
 
 	public function deleteTodo($request, $response, $args)
 	{
-		$sth = $this->db->prepare("DELETE FROM tasks WHERE id=:id");
-        $sth->bindParam("id", $args['id']);
-        $sth->execute();
-        $todos = $sth->fetchObject();
-    	$url = urlFor($todos);
-    	var_dump($url);
-      	return $this->response->withJson($todos)->withRedirect('/todos');
+		// $sth = $this->db->prepare("DELETE FROM tasks WHERE id=:id");
+  //    $sth->bindParam("id", $args['id']);
+        $id = $args['id'];
+        $todos = Task::find($id);
+     //    $todos = $sth->fetchObject();
+    	// $url = urlFor($todos);
+
+    	$todos->delete();
+
+
+      	return $response->withJson($todos)->withRedirect('/todos');
 
    
 	}

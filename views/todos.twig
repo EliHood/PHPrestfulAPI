@@ -10,9 +10,11 @@
         <small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
 
 
-
-
-       <a href="/todo/{{ task.id}}">Delete</a>
+	       <form class="form-group" action="/todo/{{task.id}}" method="post">
+			    ... other form fields here...
+			    <input type="hidden" name="_METHOD" value="DELETE"/>
+			    <button type="submit" class="btn btn-primary">Delete</button>
+		</form>
 		</div>
     {% endfor %}
 

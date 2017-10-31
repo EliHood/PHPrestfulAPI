@@ -26,16 +26,16 @@ use Slim\Http\Response;
     $app->post('/todo', '\App\Controllers\HomeController:addTask');
     
 
-   $app->delete('/todo/[{id}]', '\App\Controllers\TodosController:deleteTodo');
+   $app->delete('/todo/[{id}]', '\App\Controllers\TodosController:deleteTodo')->setName('deletetask');
 
-    // Retrieve todo with id 
-    $app->get('/todo/[{id}]', function ($request, $response, $args) {
-         $sth = $this->db->prepare("SELECT * FROM tasks WHERE id=:id");
-        $sth->bindParam("id", $args['id']);
-        $sth->execute();
-        $todos = $sth->fetchObject();
-        return $this->response->withJson($todos);
-    });
+    // // Retrieve todo with id 
+    // $app->get('/todo/[{id}]', function ($request, $response, $args) {
+    //      $sth = $this->db->prepare("SELECT * FROM tasks WHERE id=:id");
+    //     $sth->bindParam("id", $args['id']);
+    //     $sth->execute();
+    //     $todos = $sth->fetchObject();
+    //     return $this->response->withJson($todos);
+    // });
  
  
     // Search for todo with given search teram in their name
