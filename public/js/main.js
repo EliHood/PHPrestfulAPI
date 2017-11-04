@@ -4,32 +4,34 @@ app.controller('myCtrl', function($scope, $http, $location){
  	
 $scope.deleteTask = function(id){
 
-   //  $http.get('/todo/' + id).then(function(data, status, headers, config){
-   //  	    $http.delete('/todo/' + id);
-   //          $scope.activePath = $location.path('/');
-   //      });
-  	// }
-	  $http({
-	      method: 'DELETE',
-	      url: '/todo/' + id
-	   }).then(function (response){
-	   	console.log("it works");
-	   },function (rejection){
-	   	 console.log("Task didn't delete");
-	   });
-}
+	$http.delete('/todo/' + id).then(function(data){
+		    //This function is not being executed since you are getting a 405 response 
+		}, function(error){
+		    $( '#task' + id ).fadeOut(100, function(){
+		        $(this).remove();
+		    });
+		});
 
- 
+ }
 
-});
 
-$(document).ready(function(){
 
-	$('#disappear').click(function(){
-		$('#gone').fadeOut(1000);
+$scope.addTask = function(taskdata){
 
+
+	$http.post('/todo', taskdata).then(function(response){
+		taskdata.task = '';
+		console.log("it works");
+	}, function(rejection){
+		console.log("it didn't work");
 	});
 
 
+}
 
+ 
 });
+
+
+
+

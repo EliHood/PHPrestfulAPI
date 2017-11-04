@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ base_url() }}/css/style.css">
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
     <body ng-controller="myCtrl">
        <nav class="navbar navbar-default navbar-static-top">
@@ -22,9 +24,20 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/todos">Todos</a></li>
-                        </ul>
+                              {% if auth.check %}
+                            <li><a href="/dashboard">Dashboard</a></li>
+                        
+                            
+                             <li><a href="/todos">Todos</a></li>
+                            
+                             <li><a href="{{ path_for('auth.signout')}}">Sign Out</a><li>
+
+                             {% else %}
+                             <li><a href="{{ path_for('auth.signin')}}">Sign In</a></li>
+
+
+                            {% endif %}
+                        </ul> 
                     </div>
                     <!--/.nav-collapse -->
                 </div>

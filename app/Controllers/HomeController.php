@@ -6,32 +6,31 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 use App\Models\Task;
+use App\Models\User;
+
+use App\Auth\Auth;
+
 class HomeController extends BaseController
 {
 	
 	public function index($request, $response)
 	{
+
+		
 		return $this->c->view->render($response, 'home.twig');
+
 	}
 
 	public function addTask($request, $response) {
-        $input = $request->getParsedBody();
-        $sql = new Task();
 
-        $options = array(
-		    'options' => array(
-		        'default' => 3, // value to return if the filter fails
-		        // other options here
-		        'min_range' => 0
-		    ),
-		    'flags' => FILTER_FLAG_STRIP_BACKTICK,
-		);
-
-        $sql->task = filter_var($input['task'], FILTER_SANITIZE_STRING, $options);
+		$data = $request->getParsedBody();
+		$task = Task::create([
+		    'task' => filter_var($data['task'],FILTER_SANITIZE_STRING),   // $request->title also works?
+		    'user_id' => Auth::user()->user_id   // there might be a better solution, but this works 100%
+		]);
 
 
-        $sql->save();
-        return $response->write($sql->toJson())->withRedirect('/todos');
+        return $response->write($task->toJson())->withRedirect('/dashboard');
    	}
 
 

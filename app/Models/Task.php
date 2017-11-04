@@ -12,10 +12,15 @@ class Task extends Model
 {
 
     protected $table = 'tasks';
-    protected $fillable = ['task'];
+    protected $fillable = ['task', 'user_id'];
+
 
     public $timestamps = [];
 
 
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User', 'user_id');
+    }
 
 }

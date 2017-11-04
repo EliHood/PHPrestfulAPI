@@ -4,14 +4,13 @@
 <h1>My Todos</h1>
 
 <ol>
-  {% for task in todos %}
-  		<div id="gone" class="myl" ng-controller="myCtrl" ng-hide="hideRow[$index]">
+  {% for task in tasks %}
+  		<div id="task{{task.id}}" class="myl" ng-controller="myCtrl">
         <li><h4>{{ task.task}}</h4></li>
         <small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
-
-
-	   
-	<button id="disappear" class="btn btn-sm btn-danger" ng-click="deleteTask({{task.id}})">Delete</button>
+        <small style="font-style:italic">{{ task.user.username}}</small>    
+        </br>
+<button id="disappear" name="task" class="btn btn-sm btn-danger" ng-click="deleteTask({{task.id}})">Delete</button>
 
 
 

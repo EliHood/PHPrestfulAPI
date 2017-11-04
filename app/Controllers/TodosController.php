@@ -5,20 +5,29 @@ namespace App\Controllers;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-
+use Illuminate\Database\Capsule\Manager as DB;
 use App\Models\Task;
+
+use App\Models\User;
+
+
 
 class TodosController extends BaseController
 {
 
 	public function getTodos($request, $response, $args)
 	{
-		// $sth = $this->db->prepare("SELECT * FROM tasks ORDER BY task");
-		// $sth->execute();
- 		$todos = Task::all();
-     
-        return $this->c->view->render($response, 'todos.twig', ['todos' => $todos]);
 
+
+ 		$tasks = Task::with('user')->get();
+     
+     	return $this->c->view->render($response, 'todos.twig', ['tasks' => $tasks]);
+
+	}
+
+	public function helloWorld()
+	{
+		return 'hello world';
 	}
 
 	public function deleteTodo($request, $response,  $id)
@@ -33,7 +42,7 @@ class TodosController extends BaseController
     	$todos->delete();
 
 
-      	// return $response->withJson($todos)->withRedirect('/todos');
+       return $response->withJson($todos)->withRedirect('/todos');
 
    
 	}

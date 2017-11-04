@@ -1,10 +1,29 @@
 <?php
 // DIC configuration
 
-
+require "config.php";
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 
 $container = $app->getContainer();
+
+
+// get database connection config has the values set up
+
+$capsule = new Capsule;
+$capsule->addConnection([
+  'driver' => 'mysql',
+  'host' => DB_HOST,
+  'port' => DB_PORT,
+  'database' => DB_NAME,
+  'username' => DB_USER,
+  'password' => DB_PASSWORD,
+  'charset' => 'utf8',
+  'collation' => 'utf8_unicode_ci',
+]);
+$capsule->bootEloquent();
+$capsule->setAsGlobal();
+
 
 
 // view renderer
@@ -22,13 +41,6 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-$capsule = new \Illuminate\Database\Capsule\Manager;
- 
-$capsule->addConnection($container['settings']['db']);
-
-$capsule->setAsGlobal();
- 
-$capsule->bootEloquent();
 
 // $container['db'] = function($c){
 // 	$settings = $c->get('settings')['db'];
@@ -39,12 +51,11 @@ $capsule->bootEloquent();
 //     return $pdo;
 // };
 
-$container['db'] = function ($container) use ($capsule){
- 
-   return $capsule;
- 
-};
 
+
+$container['auth'] = function($container){
+    return new \App\Auth\Auth;
+};
 
 
 
@@ -61,6 +72,14 @@ $container['view'] = function ($container) {
         $container->router,
         $container->request->getUri()
     ) );
+
+
+
+    $view->getEnvironment()->addGlobal('auth', [
+        'check' => $container->auth->check(),
+        'user' => $container->auth->user()
+    ]);
+
 
 
 
