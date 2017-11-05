@@ -15,13 +15,13 @@ use App\Models\Image;
     $app->get('/todos', '\App\Controllers\TodosController:getTodos');
     $app->get('/', '\App\Controllers\HomeController:index');
     $app->post('/todo', '\App\Controllers\HomeController:addTask');
-    $app->post('/auth/adduser','\App\Controllers\Auth\AuthController:addUser');
+    $app->post('/auth/adduser','\App\Controllers\Auth\AuthController:addUser')->setName('auth.signup');
     $app->get('/dashboard', '\App\Controllers\Auth\AuthController:getDashboard');
 
     $app->get('/auth/signin', '\App\Controllers\Auth\AuthController:getSignin')->setName('auth.signin');
-    $app->post('/auth/signin', '\App\Controllers\Auth\AuthController:postSignin');
+    $app->post('/auth/signin', '\App\Controllers\Auth\AuthController:postSignin')->setName('auth.login');
 
-    $app->get('/auth/signup', '\App\Controllers\Auth\AuthController:getSignUp');
+    $app->get('/auth/signup', '\App\Controllers\Auth\AuthController:getSignUp')->setName('auth.register');;
 
     $app->get('/auth/signout', '\App\Controllers\Auth\AuthController:getSignOut')->setName('auth.signout');
 

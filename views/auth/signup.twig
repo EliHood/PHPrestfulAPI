@@ -5,19 +5,30 @@
 
 <div class="row">
 	<div class="col-12 col-md-8">
-		<form method="POST" action="/auth/adduser">
+		<form method="POST" ng-class="{ 'has-error' : signupform.$invalid && !signupform.$pristine }" class="signup_form"  name="signupform" action="{{ path_for('auth.signup')}} "  novalidate>
 		  <div class="form-group">
 		    <label for="username">Username</label>
-		    <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username">
+			<input class="form-control" type="text" name="username" ng-minlength="6" ng-model="signup.username" id="username" placeholder="Enter Your Username" ng-required="true">
+						
+			<p ng-show ="signupform.username.$invalid && !signform.username.$pristine" class="help-block ">Please enter Your Username</p>
 
-		    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			<p class="help-block" ng-show = "signupform.username.$error.minlength">Username must be at least 6 characters</p>
+
 		  </div>
 		  <div class="form-group">
 		    <label for="Password">Password</label>
-		    <input type="password" name="password" class="form-control" placeholder="Password">
+		    <input type="password" ng-model="signup.password" ng-minlength="6" ng-required="true" name="password" class="form-control" placeholder="Enter Password">
+
+		    <p ng-show ="signupform.password.$invalid && !signupform.password.$pristine" class="help-block">
+			Please enter a Password
+		    </p>
+
+		    <p ng-show ="signupform.password.$error.minlength" class="help-block">
+		    Password must be at least 6 characters
+		    </p>
 
 		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button ng-disabled="signupform.$invalid" type="submit" class="btn btn-primary">Submit</button>
 		</form>
 
 

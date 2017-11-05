@@ -32,9 +32,9 @@
                              <li><a href="{{ path_for('auth.signout')}}">Sign Out</a><li>
 
                              {% else %}
+                             <li><a href="{{ path_for('auth.register')}}"> Sign Up</a></li>
                              <li><a href="{{ path_for('auth.signin')}}">Sign In</a></li>
-
-
+                     
                             {% endif %}
                         </ul> 
                     </div>
