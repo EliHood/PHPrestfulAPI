@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-md">
+	<div class="col-12 col-md-2">
 		<div class="panel panel-default">
 			<div class="panel-heading">Sign In</div>
 			<div class="panel-body">
-				<form method="POST" ng-class="{ 'has-error' : signform.$invalid && !signform.$pristine }" class="sign_form"  name="signform" action="/auth/signin"   novalidate>
+				<form method="POST" ng-class="{ 'has-error' : signform.$invalid && !signform.$pristine }" class="sign_form"  name="signform" action="{{ path_for('auth.signin')}} " novalidate>
 					<div class="form-group" >
 						<label for="">Username</label>
 						<input class="form-control" type="text" name="username" ng-model="sign.username" id="username" placeholder="Enter Your Username" ng-required="true">
