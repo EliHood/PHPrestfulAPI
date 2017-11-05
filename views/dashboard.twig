@@ -7,21 +7,17 @@
 
 <div class="row">
 	<div class="col-12 col-md-8">
-
 		<div ng-controller="myCtrl" class="form-group">
-		
-
-			<label for="AddTask">Add Task</label></br>
-			  <input style="display:block; margin:10px 0px;" type="text" ng-model="taskdata.task" name="task">
-			 
-		
-
-			<button ng-click="addTask(taskdata)" type="submit" class="btn btn-primary">Submit</button>
-
- </form>
+			
+			<form method="POST" action="/todo" name="taskform" class="myform" novalidate>
+				<label for="AddTask">Add Task</label></br>
+				<div class="form-group" ng-class="{ 'has-error' : taskform.$invalid && !taskform.$pristine }">
+					<input type="text" ng-model="taskdata.task" name="task" ng-required="true">
+					<p ng-show="taskform.task.$invalid && !taskform.task.$pristine" class="help-block">Please enter a task</p>
+				</div>
+				<button type="submit" class="btn btn-primary" ng-disabled="taskform.$invalid">Submit</button>
+			</form>
 		</div>
-
-
 	</div>
 </div>
       {% endif %}

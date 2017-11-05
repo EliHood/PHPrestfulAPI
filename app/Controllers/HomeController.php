@@ -30,7 +30,7 @@ class HomeController extends BaseController
 		]);
 
 
-        return $response->write($task->toJson())->withRedirect('/dashboard');
+        return $response->write($task->toJson())->withRedirect('/todos');
    	}
 
 

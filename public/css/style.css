@@ -11,3 +11,14 @@
 .myl{
 	border-bottom: 1px solid #000;
 }
+
+
+.myform input.ng-invalid.ng-touched{
+	border:1px solid red;
+
+}
+
+.myform button[disabled = "disabled"]{
+	opacity: 0.4;
+	cursor: not-allowed !important;
+}

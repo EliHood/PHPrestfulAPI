@@ -1,21 +1,15 @@
 {% extends "templates/layout.html" %}
-
 {% block content %}
-<h1>My Todos</h1>
-
-<ol>
-  {% for task in tasks %}
-  		<div id="task{{task.id}}" class="myl" ng-controller="myCtrl">
-        <li><h4>{{ task.task}}</h4></li>
-        <small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
-        <small style="font-style:italic">{{ task.user.username}}</small>    
-        </br>
-<button id="disappear" name="task" class="btn btn-sm btn-danger" ng-click="deleteTask({{task.id}})">Delete</button>
-
-
-
-		</div>
-    {% endfor %}
-
-</ol>
+	<h1>My Todos</h1>
+	<ol>
+		{% for task in tasks %}
+			<div id="task{{task.id}}" class="myl" ng-controller="myCtrl">
+				<li><h4>{{ task.task}}</h4></li>
+				<small style="font-style:italic">{{task.created_at |date("m/d/Y")}}</small></br>
+				<small style="font-style:italic">{{ task.user.username}}</small>
+				</br>
+				<button id="disappear" name="task" class="btn btn-sm btn-danger" ng-click="deleteTask({{task.id}})">Delete</button>
+			</div>
+		{% endfor %}
+	</ol>
 {% endblock %}
