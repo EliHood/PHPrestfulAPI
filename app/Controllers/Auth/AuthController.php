@@ -47,7 +47,7 @@ class AuthController extends BaseController
 
    public function getSignin($request, $response)
    {
-      return $this->c->view->render($response, 'auth/signin.twig');
+      return $this->c->view->render($response, '/auth/signin.twig');
    }
 
    public function getSignup($request, $response)
@@ -65,8 +65,8 @@ class AuthController extends BaseController
 
       if(!$auth)
       {
-        return $this->c->view->render($response, 'auth/signin.twig');
-      }      
+         return $this->c->view->render($response, 'auth/signin.twig');
+      }
 
       return $response->withRedirect('/dashboard');
    }

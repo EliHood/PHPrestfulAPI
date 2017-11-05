@@ -10,7 +10,7 @@ use App\Models\Task;
 
 use App\Models\User;
 
-
+use App\Auth\Auth;
 
 class TodosController extends BaseController
 {
@@ -18,6 +18,12 @@ class TodosController extends BaseController
 	public function getTodos($request, $response, $args)
 	{
 
+		$auth = $this->c->auth->user();
+
+		if(!$auth){
+			
+			 return $response->withRedirect('/auth/signin');
+		}
 
  		$tasks = Task::with('user')->get();
      
