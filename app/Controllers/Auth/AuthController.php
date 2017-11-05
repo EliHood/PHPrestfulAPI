@@ -29,7 +29,7 @@ class AuthController extends BaseController
    		
 		$sql->save();
 
-		return $response->write($sql)->withRedirect('/');
+		return $response->write($sql)->withRedirect('/dashboard');
    	}
 
    public function getDashboard($request, $response)
@@ -47,7 +47,7 @@ class AuthController extends BaseController
 
    public function getSignin($request, $response)
    {
-      return $this->c->view->render($response, 'auth/signin.twig');
+      return $this->c->view->render($response, '/auth/signin.twig');
    }
 
    public function getSignup($request, $response)
@@ -65,7 +65,7 @@ class AuthController extends BaseController
 
       if(!$auth)
       {
-         return $response->withRedirect('/auth/signin.twig');
+         return $response->withRedirect('auth/signin.twig');
       }
 
       return $response->withRedirect('/dashboard');

@@ -1,28 +1,30 @@
-
-{% extends 'templates/layout.html' %}
+{% extends "templates/layout.html" %}
 
 {% block content %}
-	<div class="row">
-		<div class="col-md">
-			<div class="panel panel-default">
-				<div class="panel-heading">Sign In</div>
-				<div class="panel-body">
-					<form action="/auth/signin" method="POST" autocomplete="off">
-						<div class="form-group">
-							<label for="">Username</label>
-							<input class="form-control" type="text" name="username" id="username" placeholder="Enter Your Username" value="">
+<div class="row">
+	<div class="col-md">
+		<div class="panel panel-default">
+			<div class="panel-heading">Sign In</div>
+			<div class="panel-body">
+				<form method="POST" ng-class="{ 'has-error' : signform.$invalid && !signform.$pristine }" class="sign_form"  name="signform" action="/auth/signin"   novalidate>
+					<div class="form-group" >
+						<label for="">Username</label>
+						<input class="form-control" type="text" name="username" ng-model="sign.username" id="username" placeholder="Enter Your Username" ng-required="true">
 						
-						</div>
-						<div class="form-group">
-							<label for="">Password</label>
-							<input class="form-control" type="password" name="password" id="password" value="">
-						</div>
-						<button type="submit" class="btn btn-default">Sign In</button>
-
-						{{ csrf.field | raw }}
-					</form>
-				</div>
+						<p ng-show ="signform.username.$invalid && !signform.username.$pristine" class="help-block ">Please enter Your Username</p>
+					</div>
+					<div class="form-group">
+						<label for="">Password</label>
+						<input class="form-control" type="password" name="password" ng-model="sign.password" id="password" ng-required="true">
+						<p ng-show ="signform.password.$touched && !signform.password.$pristine" class="help-block">
+							Please Enter Your Password
+						</p>
+					</div>
+					<button type="submit" ng-disabled="signform.$invalid" class="btn btn-default">Sign In</button>
+					{{ csrf.field | raw }}
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
 {% endblock %}

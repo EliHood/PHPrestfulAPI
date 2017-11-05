@@ -18,6 +18,9 @@
 
 }
 
+.sign_form input.ng-invalid.ng-touched{
+	border: 1px solid red;
+}
 .myform button[disabled = "disabled"]{
 	opacity: 0.4;
 	cursor: not-allowed !important;

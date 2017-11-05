@@ -6,7 +6,7 @@ $scope.deleteTask = function(id){
 
 	$http.delete('/todo/' + id).then(function(data){
 		    //This function is not being executed since you are getting a 405 response 
-		}, function(error){
+		}, function(data){
 		    $( '#task' + id ).fadeOut(100, function(){
 		        $(this).remove();
 		    });
