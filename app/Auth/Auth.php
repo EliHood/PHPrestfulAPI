@@ -38,6 +38,22 @@ class Auth
 		}
 	}
 
+	public function username_exists($username)
+	{
+		$user = User::where('username', '=', $username)->count();
+
+		if($user > 0){
+
+			return "username already taken";
+			
+
+		}
+	
+
+
+
+	}
+
 	public function check()
 	{
 		if(isset($_SESSION['user']))

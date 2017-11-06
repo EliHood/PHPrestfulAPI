@@ -21,16 +21,33 @@ class AuthController extends BaseController
 
 
    		$sql = new User();
-   		$sql->username = $input['username'];
-		$options = [
-		    'cost' => 12,
-		];
-   		$sql->password = password_hash($input['password'],PASSWORD_BCRYPT, $options);
+   		$sql->username = filter_var($input['username'], FILTER_SANITIZE_STRING);
+   		$options = [
+   		    'cost' => 12,
+   		];
+   		$sql->password = password_hash($input['password'],PASSWORD_BCRYPT, $options);		
+
+
    		
-		$sql->save();
+         $username = filter_var($input['username'], FILTER_SANITIZE_STRING);
+
+         // $this->c->auth->username_exists($username);
+
+         if(User::where('username', '=', $username)->exists()) {
+
+            return "username already taken";
+
+
+         }
+
+
+
+         $sql->save();
+       
+     
 
 		return $response->write($sql)->withRedirect('/dashboard');
-   	}
+   }
 
    public function getDashboard($request, $response)
    {

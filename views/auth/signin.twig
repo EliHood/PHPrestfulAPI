@@ -17,7 +17,7 @@
 					<div class="form-group">
 						<label for="">Password</label>
 						<input class="form-control" type="password" name="password" ng-model="sign.password" id="password" ng-required="true">
-						<p ng-show ="signform.password.$touched && !signform.password.$pristine" class="help-block">
+						<p ng-show ="signform.password.$invalid && signform.password.$touched" class="help-block">
 							Please Enter Your Password
 						</p>
 					</div>
