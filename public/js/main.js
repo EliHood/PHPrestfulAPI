@@ -1,7 +1,14 @@
-var app = angular.module('eli',[]);
+var app = angular.module('eli',['usernameScope.directive']);
+
+app.config(['$interpolateProvider', function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+  }]);
+
 
 app.controller('myCtrl', function($scope, $http, $location){
- 	
+
+
 $scope.deleteTask = function(id){
 
 	$http.delete('/todo/' + id).then(function(data){
@@ -29,8 +36,14 @@ $scope.addTask = function(taskdata){
 
 }
 
+
+
+
  
 });
+
+
+
 
 
 
